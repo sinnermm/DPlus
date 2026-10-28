@@ -1,0 +1,152 @@
+{
+  "com.ss.ttvideoengine.TTVideoEngine": {
+    "dex": "classes2.dex",
+    "methods": [
+      {
+        "name": "pause",
+        "return": "V",
+        "parameters": [],
+        "access": 1
+      },
+      {
+        "name": "play",
+        "return": "V",
+        "parameters": [],
+        "access": 1
+      },
+      {
+        "name": "setListener",
+        "return": "V",
+        "parameters": [
+          "Lcom/ss/ttvideoengine/VideoEngineListener;"
+        ],
+        "access": 1
+      },
+      {
+        "name": "setLooping",
+        "return": "V",
+        "parameters": [
+          "Z"
+        ],
+        "access": 1
+      },
+      {
+        "name": "setPlaybackParams",
+        "return": "V",
+        "parameters": [
+          "Lcom/ss/ttm/player/PlaybackParams;"
+        ],
+        "access": 1
+      }
+    ]
+  },
+  "com.ss.ttm.player.PlaybackParams": {
+    "dex": "classes2.dex",
+    "methods": [
+      {
+        "name": "setSpeed",
+        "return": "Lcom/ss/ttm/player/PlaybackParams;",
+        "parameters": [
+          "F"
+        ],
+        "access": 1
+      }
+    ]
+  },
+  "com.ss.android.ugc.aweme.comment.adapter.CommentViewHolderOldStyle": {
+    "dex": "classes31.dex",
+    "methods": [
+      {
+        "name": "I3",
+        "return": "V",
+        "parameters": [
+          "Z"
+        ],
+        "access": 17
+      }
+    ]
+  },
+  "com.ss.android.ugc.aweme.comment.adapter.vh.holders.CommentViewHolder": {
+    "dex": "classes31.dex",
+    "methods": [
+      {
+        "name": "I3",
+        "return": "V",
+        "parameters": [
+          "Lcom/ss/android/ugc/aweme/comment/model/Comment;"
+        ],
+        "access": 17
+      }
+    ]
+  },
+  "com.ss.android.ugc.aweme.comment.model.CommentItemList": {
+    "dex": "classes31.dex",
+    "methods": [
+      {
+        "name": "getItems",
+        "return": "Ljava/util/List;",
+        "parameters": [],
+        "access": 17
+      }
+    ]
+  },
+  "com.ss.android.ugc.aweme.feed.model.FeedItemList": {
+    "dex": "classes36.dex",
+    "methods": [
+      {
+        "name": "getItems",
+        "return": "Ljava/util/List;",
+        "parameters": [],
+        "access": 17
+      }
+    ]
+  },
+  "com.ss.android.ugc.aweme.feed.panel.BaseListFragmentPanel": {
+    "dex": "classes45.dex",
+    "methods": [
+      {
+        "name": "getCurrentAweme",
+        "return": "Lcom/ss/android/ugc/aweme/feed/model/Aweme;",
+        "parameters": [],
+        "access": 17
+      },
+      {
+        "name": "getCurrentIndex",
+        "return": "I",
+        "parameters": [],
+        "access": 17
+      },
+      {
+        "name": "onVideoPlayerEvent",
+        "return": "V",
+        "parameters": [
+          "Lcom/ss/android/ugc/aweme/shortvideo/event/VideoPlayerStatus;"
+        ],
+        "access": 1
+      },
+      {
+        "name": "setCurrentItem",
+        "return": "V",
+        "parameters": [
+          "I",
+          "Z"
+        ],
+        "access": 1
+      }
+    ]
+  },
+  "com.ss.android.ugc.aweme.feed.plato.core.FeedComponentGroup": {
+    "dex": "classes46.dex",
+    "methods": [
+      {
+        "name": "interceptDoubleClick",
+        "return": "Z",
+        "parameters": [
+          "Landroid/view/MotionEvent;",
+          "Landroid/view/MotionEvent;"
+        ],
+        "access": 1
+      }
+    ]
+  }
+}
