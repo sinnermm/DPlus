@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+ <uses-permission android:name="android.permission.INTERNET"/>
+ <queries><package android:name="com.ss.android.ugc.aweme"/><package android:name="com.ss.android.ugc.aweme.lite"/><package android:name="com.ss.android.ugc.aweme.mobile"/></queries>
+ <application android:allowBackup="false" android:usesCleartextTraffic="false" android:label="抖+" android:icon="@drawable/ic_module" android:theme="@style/AppTheme" android:dataExtractionRules="@xml/data_extraction_rules" android:fullBackupContent="false" tools:ignore="UnusedAttribute">
+  <activity android:name=".ui.MainActivity" android:exported="true">
+   <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
+   <intent-filter><action android:name="android.intent.action.SEND"/><category android:name="android.intent.category.DEFAULT"/><data android:mimeType="text/plain"/></intent-filter>
+   <intent-filter><action android:name="android.intent.action.VIEW"/><category android:name="android.intent.category.DEFAULT"/><category android:name="android.intent.category.BROWSABLE"/><data android:scheme="https" android:host="v.douyin.com"/></intent-filter>
+  </activity>
+  <provider android:name=".config.SettingsProvider" android:authorities="com.yolo.dyfusion.bridge" android:exported="true"/>
+  <meta-data android:name="xposedmodule" android:value="true"/>
+  <meta-data android:name="xposedminversion" android:value="93"/>
+  <meta-data android:name="xposeddescription" android:value="独立抖音增强模块；40.7.0 适配预览，详见功能状态"/>
+  <meta-data android:name="xposedscope" android:resource="@array/xposed_scope"/>
+ </application>
+</manifest>
+
