@@ -1,0 +1,1 @@
+<resources><string-array name="xposed_scope"><item>com.ss.android.ugc.aweme</item><item>com.ss.android.ugc.aweme.lite</item><item>com.ss.android.ugc.aweme.mobile</item><item>com.yolo.dyfusion</item></string-array></resources>
