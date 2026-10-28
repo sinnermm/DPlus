@@ -1,0 +1,11 @@
+{
+  "version": "0.3.3-preview",
+  "applicationId": "com.yolo.dyfusion",
+  "versionCode": 8,
+  "displayName": "抖+",
+  "apkSha256": "0eecfa6fd0511c33862461f2e430f91af461030ead94cb5ae0b721c5fe67a0c0",
+  "hostSha256": "81a0d01ad5fd9d10c148f8f76a2d4f6ba3dbcb0907fbf40b586993a31f05e744",
+  "settingsCount": 88,
+  "coreAssertions": 44,
+  "androidAssertions": 44
+}
