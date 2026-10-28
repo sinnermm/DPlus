@@ -1,0 +1,873 @@
+[
+  {
+    "key": "enabled",
+    "group": "基础",
+    "title": "功能总开关",
+    "type": "bool",
+    "default": true,
+    "status": "implemented_unverified",
+    "summary": "子功能默认关闭；关闭后停止数据过滤并恢复模块修改的界面。"
+  },
+  {
+    "key": "floating_menu",
+    "group": "快捷操作",
+    "title": "显示模块悬浮球",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "播放页显示圆形“抖+”入口；关闭后不占触摸区域。"
+  },
+  {
+    "key": "volume_menu",
+    "group": "快捷操作",
+    "title": "音量键组合菜单",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "先音量加，再在 900 毫秒内按音量减；正常音量操作仍保留。"
+  },
+  {
+    "key": "share_entry",
+    "group": "快捷操作",
+    "title": "分享面板抖+入口",
+    "type": "bool",
+    "default": true,
+    "status": "implemented_unverified",
+    "summary": "识别作品分享面板后添加“抖+功能”；不修改联系人列表。未识别时可用音量键或手势入口。"
+  },
+  {
+    "key": "default_speed",
+    "group": "播放",
+    "title": "默认播放速度",
+    "type": "number",
+    "default": 1.0,
+    "status": "implemented_unverified",
+    "summary": "范围 0.25–4；只对已识别的视频播放页应用。",
+    "min": 0.25,
+    "max": 4
+  },
+  {
+    "key": "force_speed",
+    "group": "播放",
+    "title": "应用默认倍速",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "在播放器 play 和 PlaybackParams.setSpeed 上应用设置值。"
+  },
+  {
+    "key": "pause_at_end",
+    "group": "播放",
+    "title": "播放完成后暂停",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "捕获 VideoEngineListener.onCompletion；与自动下一条互斥。"
+  },
+  {
+    "key": "auto_next",
+    "group": "播放",
+    "title": "播放完成后下一条",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "通过实际 Feed panel 的 setCurrentItem 切换；离开播放页或作品变更后取消延迟任务。"
+  },
+  {
+    "key": "next_delay_ms",
+    "group": "播放",
+    "title": "自动切换延迟（毫秒）",
+    "type": "int",
+    "default": 0,
+    "status": "implemented_unverified",
+    "summary": "0–10000 毫秒。",
+    "min": 0,
+    "max": 10000
+  },
+  {
+    "key": "next_direction",
+    "group": "播放",
+    "title": "切换方向",
+    "type": "int",
+    "default": 1,
+    "status": "implemented_unverified",
+    "summary": "1 为下一条，-1 为上一条。",
+    "min": -1,
+    "max": 1
+  },
+  {
+    "key": "disable_double_like",
+    "group": "播放",
+    "title": "禁用双击点赞",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "拦截 FeedComponentGroup.interceptDoubleClick；不拦截系统全部手势。"
+  },
+  {
+    "key": "video_center",
+    "group": "播放",
+    "title": "视频画面自动居中",
+    "type": "bool",
+    "default": true,
+    "status": "implemented_unverified",
+    "summary": "只平移当前播放器显示层，补偿底部预留区域；不移动整页或拉伸画面。"
+  },
+  {
+    "key": "video_offset_dp",
+    "group": "播放",
+    "title": "视频垂直微调（dp）",
+    "type": "int",
+    "default": 0,
+    "status": "implemented_unverified",
+    "summary": "正数下移，负数上移；可与自动居中叠加。",
+    "min": -240,
+    "max": 240
+  },
+  {
+    "key": "quality_mode",
+    "group": "播放",
+    "title": "默认播放画质",
+    "type": "choice",
+    "default": "native",
+    "status": "implemented_unverified",
+    "summary": "三种模式：跟随抖音、最高可用档、最高档直链。只使用作品实际提供的源，不伪造原始文件。",
+    "options": [
+      "native",
+      "highest",
+      "direct"
+    ]
+  },
+  {
+    "key": "fit_x",
+    "group": "播放",
+    "title": "防止视频左右溢出",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "把当前显示层等比缩小到左右显示区；不拉伸画面。"
+  },
+  {
+    "key": "fit_y",
+    "group": "播放",
+    "title": "防止视频上下溢出",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "把当前显示层等比缩小到上下显示区；结合居中与垂直微调。"
+  },
+  {
+    "key": "filter_ads",
+    "group": "内容过滤",
+    "title": "过滤信息流广告",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "独立实现；Hook 命中不等于已验证。"
+  },
+  {
+    "key": "filter_live",
+    "group": "内容过滤",
+    "title": "过滤直播推荐",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "独立实现；Hook 命中不等于已验证。"
+  },
+  {
+    "key": "filter_images",
+    "group": "内容过滤",
+    "title": "过滤图文作品",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "独立实现；Hook 命中不等于已验证。"
+  },
+  {
+    "key": "filter_commerce",
+    "group": "内容过滤",
+    "title": "过滤明确电商内容",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "仅检查明确的商品推广字段，不把所有链接或普通话题当广告。"
+  },
+  {
+    "key": "filter_keywords",
+    "group": "内容过滤",
+    "title": "标题屏蔽词",
+    "type": "text",
+    "default": "",
+    "status": "implemented_unverified",
+    "summary": "逗号或换行分隔，不区分大小写；不使用未受控正则。"
+  },
+  {
+    "key": "filter_uids",
+    "group": "内容过滤",
+    "title": "作者 UID 屏蔽名单",
+    "type": "text",
+    "default": "",
+    "status": "implemented_unverified",
+    "summary": "精确匹配 UID 或 sec_uid，逗号或换行分隔。"
+  },
+  {
+    "key": "min_likes",
+    "group": "内容过滤",
+    "title": "最低点赞数",
+    "type": "int",
+    "default": 0,
+    "status": "implemented_unverified",
+    "summary": "0 为不限制；未知计数不自动屏蔽。",
+    "min": 0,
+    "max": 1000000000
+  },
+  {
+    "key": "min_duration",
+    "group": "内容过滤",
+    "title": "最短时长（秒）",
+    "type": "int",
+    "default": 0,
+    "status": "implemented_unverified",
+    "summary": "0 为不限制；仅过滤普通视频。",
+    "min": 0,
+    "max": 36000
+  },
+  {
+    "key": "max_duration",
+    "group": "内容过滤",
+    "title": "最长时长（秒）",
+    "type": "int",
+    "default": 0,
+    "status": "implemented_unverified",
+    "summary": "0 为不限制；仅过滤普通视频。",
+    "min": 0,
+    "max": 36000
+  },
+  {
+    "key": "immersive_status",
+    "group": "界面",
+    "title": "播放页沉浸状态栏",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "独立实现；Hook 命中不等于已验证。"
+  },
+  {
+    "key": "hide_status",
+    "group": "界面",
+    "title": "播放时隐藏状态栏",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "独立实现；Hook 命中不等于已验证。"
+  },
+  {
+    "key": "hide_navigation",
+    "group": "界面",
+    "title": "播放时隐藏导航栏",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "独立实现；Hook 命中不等于已验证。"
+  },
+  {
+    "key": "transparent_navigation",
+    "group": "界面",
+    "title": "播放页透明导航栏",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "独立实现；Hook 命中不等于已验证。"
+  },
+  {
+    "key": "dpi",
+    "group": "界面",
+    "title": "抖音进程 DPI",
+    "type": "int",
+    "default": 0,
+    "status": "implemented_unverified",
+    "summary": "0 跟随系统；重启抖音生效。不修改手机系统设置。",
+    "min": 0,
+    "max": 640
+  },
+  {
+    "key": "hide_top_bar",
+    "group": "界面",
+    "title": "隐藏整个顶栏",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "隐藏播放页顶部频道、搜索和关联容器；暂停时也保持隐藏，关闭开关后恢复。"
+  },
+  {
+    "key": "hide_bottom_bar",
+    "group": "界面",
+    "title": "隐藏整个底栏",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "隐藏播放页整个底部导航及底栏背景；不删除导航数据，不在其他页面隐藏。"
+  },
+  {
+    "key": "hide_feed_collect",
+    "group": "界面",
+    "title": "隐藏播放页收藏",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "隐藏收藏图标、计数和对应触摸容器；限定当前作品右侧控件，不改变收藏状态。"
+  },
+  {
+    "key": "hide_top_tabs",
+    "group": "界面",
+    "title": "移除顶部标签",
+    "type": "labels",
+    "default": "",
+    "status": "implemented_unverified",
+    "summary": "多选或手动输入；移除整个标签及触摸区域，剩余标签补位。至少保留一个入口。"
+  },
+  {
+    "key": "hide_bottom_tabs",
+    "group": "界面",
+    "title": "移除底部标签",
+    "type": "labels",
+    "default": "",
+    "status": "implemented_unverified",
+    "summary": "多选或手动输入；移除整个标签及触摸区域，剩余标签补位。至少保留一个入口。"
+  },
+  {
+    "key": "hide_badges",
+    "group": "界面",
+    "title": "隐藏播放页红点角标",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "只匹配已识别导航容器中的 red_dot / badge_unread_count。"
+  },
+  {
+    "key": "hide_feed_avatar",
+    "group": "界面",
+    "title": "隐藏播放页头像",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "独立实现；Hook 命中不等于已验证。"
+  },
+  {
+    "key": "hide_feed_like",
+    "group": "界面",
+    "title": "隐藏播放页点赞",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "独立实现；Hook 命中不等于已验证。"
+  },
+  {
+    "key": "hide_feed_comment",
+    "group": "界面",
+    "title": "隐藏播放页评论",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "独立实现；Hook 命中不等于已验证。"
+  },
+  {
+    "key": "hide_feed_share",
+    "group": "界面",
+    "title": "隐藏播放页分享",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "独立实现；Hook 命中不等于已验证。"
+  },
+  {
+    "key": "hide_feed_music",
+    "group": "界面",
+    "title": "隐藏播放页音乐转盘",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "独立实现；Hook 命中不等于已验证。"
+  },
+  {
+    "key": "hide_related_search",
+    "group": "界面",
+    "title": "隐藏相关搜索整条",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "隐藏当前作品底部相关搜索的文字、图标、背景和点击区域；不隐藏合集。优先于透明度。"
+  },
+  {
+    "key": "hide_mix_bar",
+    "group": "界面",
+    "title": "隐藏合集整条",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "隐藏当前作品底部合集标题、图标、背景和点击区域；不隐藏右侧收藏。优先于合集透明度。"
+  },
+  {
+    "key": "hide_feed_desc",
+    "group": "界面",
+    "title": "隐藏播放页作品文案",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "独立实现；Hook 命中不等于已验证。"
+  },
+  {
+    "key": "hide_feed_follow",
+    "group": "界面",
+    "title": "隐藏播放页关注加号",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "独立实现；Hook 命中不等于已验证。"
+  },
+  {
+    "key": "hide_feed_seekbar",
+    "group": "界面",
+    "title": "隐藏播放页进度条",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "独立实现；Hook 命中不等于已验证。"
+  },
+  {
+    "key": "hide_feed_fullscreen",
+    "group": "界面",
+    "title": "隐藏全屏观看按钮",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "仅隐藏视频页“全屏观看”入口，不禁用播放器自身横屏能力。"
+  },
+  {
+    "key": "hide_feed_rings",
+    "group": "界面",
+    "title": "隐藏头像日常彩环",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "按当前作品头像彩环容器或已命中控件处理，不改变用户日常数据。"
+  },
+  {
+    "key": "block_ring_click",
+    "group": "界面",
+    "title": "禁用头像彩环跳日常",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "仅禁用识别出的彩环点击；保留独立头像入口。"
+  },
+  {
+    "key": "hide_feed_coauthors",
+    "group": "界面",
+    "title": "隐藏共创作者头像组",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "隐藏命中的 co_creators_group；当前版本未出现时不会修改其他布局。"
+  },
+  {
+    "key": "hide_feed_title_tag",
+    "group": "界面",
+    "title": "隐藏作品体裁标签",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "隐藏命中的 title_tag_container；不隐藏整个作品描述区域。"
+  },
+  {
+    "key": "hide_feed_nearby",
+    "group": "界面",
+    "title": "隐藏附近吃喝玩乐入口",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "仅匹配播放页明确的“附近吃喝玩乐”控件，不处理普通视频正文。"
+  },
+  {
+    "key": "hide_feed_friends",
+    "group": "界面",
+    "title": "隐藏我的朋友入口",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "仅处理播放页按钮中的“我的朋友”，不读取或删除联系人。"
+  },
+  {
+    "key": "hide_feed_live_discovery",
+    "group": "界面",
+    "title": "隐藏直播发现入口",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "仅处理当前播放页“直播发现”入口。"
+  },
+  {
+    "key": "hide_detail_search",
+    "group": "界面",
+    "title": "隐藏详情页顶部搜索",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "详情视频页的顶部搜索按钮（主信息流不处理）；按已识别顶部容器和具体按钮处理。"
+  },
+  {
+    "key": "hide_detail_back",
+    "group": "界面",
+    "title": "隐藏详情页左上返回按钮",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "仅隐藏详情页左上角“<”按钮并禁用该按钮触摸；系统返回键/手势仍可退出页面。"
+  },
+  {
+    "key": "hide_comment_input_bar",
+    "group": "界面",
+    "title": "隐藏底部发条评论输入栏",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "隐藏详情作品页的完整评论输入条及图片、@、表情触摸区域；不恢复评论增强设置。"
+  },
+  {
+    "key": "hide_listen_disc",
+    "group": "界面",
+    "title": "隐藏听抖音转盘",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "独立隐藏当前作品底部“听抖音”旋转入口及点击区域；普通音乐转盘另有开关。"
+  },
+  {
+    "key": "custom_controls",
+    "group": "界面",
+    "title": "控件扫描与预览",
+    "type": "controls",
+    "default": {},
+    "status": "implemented_unverified",
+    "summary": "读取当前作品视图的资源名、类和 ID；单控件隐藏及播放/暂停透明度可保存。不能作用于整页或播放器。"
+  },
+  {
+    "key": "play_alpha_top",
+    "group": "透明度",
+    "title": "播放时顶部透明度",
+    "type": "int",
+    "default": 100,
+    "status": "implemented_unverified",
+    "summary": "范围 0–100%；只处理已识别的播放组件。",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "key": "play_alpha_left",
+    "group": "透明度",
+    "title": "播放时文案透明度",
+    "type": "int",
+    "default": 100,
+    "status": "implemented_unverified",
+    "summary": "范围 0–100%；只处理已识别的播放组件。",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "key": "play_alpha_right",
+    "group": "透明度",
+    "title": "播放时右侧透明度",
+    "type": "int",
+    "default": 100,
+    "status": "implemented_unverified",
+    "summary": "范围 0–100%；只处理已识别的播放组件。",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "key": "play_alpha_bottom",
+    "group": "透明度",
+    "title": "播放时底栏透明度",
+    "type": "int",
+    "default": 100,
+    "status": "implemented_unverified",
+    "summary": "范围 0–100%；只处理已识别的播放组件。",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "key": "pause_alpha_top",
+    "group": "透明度",
+    "title": "暂停时顶部透明度",
+    "type": "int",
+    "default": 100,
+    "status": "implemented_unverified",
+    "summary": "范围 0–100%；只处理已识别的播放组件。",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "key": "pause_alpha_left",
+    "group": "透明度",
+    "title": "暂停时文案透明度",
+    "type": "int",
+    "default": 100,
+    "status": "implemented_unverified",
+    "summary": "范围 0–100%；只处理已识别的播放组件。",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "key": "pause_alpha_right",
+    "group": "透明度",
+    "title": "暂停时右侧透明度",
+    "type": "int",
+    "default": 100,
+    "status": "implemented_unverified",
+    "summary": "范围 0–100%；只处理已识别的播放组件。",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "key": "pause_alpha_bottom",
+    "group": "透明度",
+    "title": "暂停时底栏透明度",
+    "type": "int",
+    "default": 100,
+    "status": "implemented_unverified",
+    "summary": "范围 0–100%；只处理已识别的播放组件。",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "key": "zero_unclickable",
+    "group": "透明度",
+    "title": "透明度为零时禁用控件点击",
+    "type": "bool",
+    "default": true,
+    "status": "implemented_unverified",
+    "summary": "为零时 INVISIBLE 并禁用命中目标；标签移除固定使用 GONE。"
+  },
+  {
+    "key": "play_alpha_search",
+    "group": "透明度",
+    "title": "播放时相关搜索透明度",
+    "type": "int",
+    "default": 100,
+    "status": "implemented_unverified",
+    "summary": "0–100%；独立控制视频底部“相关搜索”容器。",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "key": "pause_alpha_search",
+    "group": "透明度",
+    "title": "暂停时相关搜索透明度",
+    "type": "int",
+    "default": 100,
+    "status": "implemented_unverified",
+    "summary": "0–100%；与播放状态分开，不与底部导航混用。",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "key": "play_alpha_mix",
+    "group": "透明度",
+    "title": "播放时合集透明度",
+    "type": "int",
+    "default": 100,
+    "min": 0,
+    "max": 100,
+    "status": "implemented_unverified",
+    "summary": "0–100%；独立控制底部合集信息条，不控制右侧收藏。"
+  },
+  {
+    "key": "pause_alpha_mix",
+    "group": "透明度",
+    "title": "暂停时合集透明度",
+    "type": "int",
+    "default": 100,
+    "min": 0,
+    "max": 100,
+    "status": "implemented_unverified",
+    "summary": "0–100%；独立控制底部合集信息条，不控制右侧收藏。"
+  },
+  {
+    "key": "play_alpha_template",
+    "group": "透明度",
+    "title": "播放时拍同款转盘透明度",
+    "type": "int",
+    "default": 100,
+    "min": 0,
+    "max": 100,
+    "status": "implemented_unverified",
+    "summary": "0–100%；独立控制右下角拍同款图标、转盘与文字，不影响整片右下区域。"
+  },
+  {
+    "key": "pause_alpha_template",
+    "group": "透明度",
+    "title": "暂停时拍同款转盘透明度",
+    "type": "int",
+    "default": 100,
+    "min": 0,
+    "max": 100,
+    "status": "implemented_unverified",
+    "summary": "0–100%；独立控制右下角拍同款图标、转盘与文字，不影响整片右下区域。"
+  },
+  {
+    "key": "play_alpha_music",
+    "group": "透明度",
+    "title": "播放时音乐转盘透明度",
+    "type": "int",
+    "default": 100,
+    "min": 0,
+    "max": 100,
+    "status": "implemented_unverified",
+    "summary": "0–100%；独立控制底部音乐转盘，隐藏底栏时同步隐藏。"
+  },
+  {
+    "key": "pause_alpha_music",
+    "group": "透明度",
+    "title": "暂停时音乐转盘透明度",
+    "type": "int",
+    "default": 100,
+    "min": 0,
+    "max": 100,
+    "status": "implemented_unverified",
+    "summary": "0–100%；独立控制底部音乐转盘，隐藏底栏时同步隐藏。"
+  },
+  {
+    "key": "hide_share_friends",
+    "group": "菜单",
+    "title": "隐藏分享给好友列表",
+    "type": "bool",
+    "default": true,
+    "status": "implemented_unverified",
+    "summary": "作品分享面板中隐藏好友列表视图，不读取其中联系人名称。"
+  },
+  {
+    "key": "hide_share_items",
+    "group": "菜单",
+    "title": "分享菜单隐藏项",
+    "type": "labels",
+    "default": "",
+    "status": "implemented_unverified",
+    "summary": "整项 GONE 并重新排位；不会自动执行点赞、推荐或分享。",
+    "options": [
+      "推荐",
+      "转发到日常",
+      "私信",
+      "建群分享",
+      "帮上热门",
+      "分享链接",
+      "身边的人",
+      "不感兴趣",
+      "保存本地",
+      "合拍",
+      "一起看视频"
+    ]
+  },
+  {
+    "key": "hide_long_items",
+    "group": "菜单",
+    "title": "长按菜单隐藏项",
+    "type": "labels",
+    "default": "",
+    "status": "implemented_unverified",
+    "summary": "只筛选已识别的视频长按菜单；不拦截未识别的系统弹窗。",
+    "options": [
+      "推荐",
+      "转发到日常",
+      "合拍",
+      "听抖音",
+      "倍速",
+      "保存至相册",
+      "缓存视频",
+      "自动连播",
+      "清屏播放",
+      "弹幕",
+      "投屏"
+    ]
+  },
+  {
+    "key": "gestures_enabled",
+    "group": "手势",
+    "title": "启用九宫格手势",
+    "type": "bool",
+    "default": false,
+    "status": "implemented_unverified",
+    "summary": "只覆盖明确配置的区域；默认区域、滑动和系统边缘手势保留。"
+  },
+  {
+    "key": "gestures",
+    "group": "手势",
+    "title": "九宫格动作设置",
+    "type": "grid",
+    "default": {},
+    "status": "implemented_unverified",
+    "summary": "每个格子分别设置双击和长按；默认不干预。长按自定义区在滑动超过阈值时立即交还宿主。"
+  },
+  {
+    "key": "download_folder",
+    "group": "解析与下载",
+    "title": "下载子目录",
+    "type": "text",
+    "default": "DyFusion",
+    "status": "implemented_unverified",
+    "summary": "保存到系统 Download 下，不支持绝对路径或 ..。"
+  },
+  {
+    "key": "filename_template",
+    "group": "解析与下载",
+    "title": "媒体命名模板",
+    "type": "text",
+    "default": "{author}_{id}_{quality}",
+    "status": "implemented_unverified",
+    "summary": "支持 {author} {title} {id} {quality} {index}；无效文件名字符自动清理。"
+  },
+  {
+    "key": "download_notification",
+    "group": "解析与下载",
+    "title": "显示系统下载完成通知",
+    "type": "bool",
+    "default": true,
+    "status": "implemented_unverified",
+    "summary": "由系统 DownloadManager 管理队列和通知。"
+  },
+  {
+    "key": "parse_share",
+    "group": "解析与下载",
+    "title": "解析公开分享链接",
+    "type": "bool",
+    "default": true,
+    "status": "implemented_unverified",
+    "summary": "独立页面工具；仅请求 Douyin 官方 HTTPS 域名，不发送登录 Cookie。若分享页不再公开媒体则明确失败。"
+  },
+  {
+    "key": "choose_quality",
+    "group": "解析与下载",
+    "title": "实际码率/清晰度选择",
+    "type": "bool",
+    "default": true,
+    "status": "implemented_unverified",
+    "summary": "只列出宿主数据或公开页面实际给出的地址，不把改 URL 参数宣称为原画。"
+  },
+  {
+    "key": "download_images",
+    "group": "解析与下载",
+    "title": "视频/图文/封面/背景音乐选择",
+    "type": "bool",
+    "default": true,
+    "status": "implemented_unverified",
+    "summary": "由“当前作品媒体”或链接解析结果逐项确认下载。音乐不是提取当前视频的完整音轨。"
+  },
+  {
+    "key": "highest_download",
+    "group": "解析与下载",
+    "title": "优先最高可用源下载",
+    "type": "bool",
+    "default": true,
+    "status": "implemented_unverified",
+    "summary": "按实际分辨率、帧率、码率排序并保留备用地址；不保证等于原始上传文件。"
+  }
+]
